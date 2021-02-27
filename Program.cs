@@ -24,10 +24,13 @@ namespace DIOBank
                         NewAccount();
                         break;
                     case "3":
+                        Transfer();
                         break;
                     case "4":
+                        Withdraw();
                         break;
                     case "5":
+                        Deposit();
                         break;
                     case "C":
                         Console.Clear();
@@ -41,6 +44,44 @@ namespace DIOBank
             }
 
             Console.WriteLine("Thank you for using our services.");
+        }
+
+        private static void Transfer()
+        {
+            Console.Write("Enter the source account number: ");
+            int sourceAccountIndex = int.Parse(Console.ReadLine()) - 1;
+
+            Console.Write("Enter the target account number: ");
+            int targetAccountIndex = int.Parse(Console.ReadLine()) - 1;
+
+            Console.Write("Enter the transfer amount: ");
+            double transferValue = double.Parse(Console.ReadLine());
+
+            accounts[sourceAccountIndex].Transfer(transferValue, accounts[targetAccountIndex]);
+        }
+
+        private static void Deposit()
+        {
+            Console.Write("Enter the account number: ");
+            int accountIndex = int.Parse(Console.ReadLine());
+
+            Console.Write("Enter the deposit amount: ");
+            double depositValue = double.Parse(Console.ReadLine());
+
+            Console.WriteLine();
+            accounts[accountIndex - 1].Deposit(depositValue);
+        }
+
+        private static void Withdraw()
+        {
+            Console.Write("Enter the account number: ");
+            int accountIndex = int.Parse(Console.ReadLine());
+
+            Console.Write("Enter the withdraw amount: ");
+            double withdrawValue = double.Parse(Console.ReadLine());
+
+            Console.WriteLine();
+            accounts[accountIndex - 1].Withdraw(withdrawValue);
         }
 
         private static void ListAccounts()

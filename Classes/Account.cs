@@ -20,21 +20,21 @@ namespace Classes
 
         private AccountType AccountType { get; set; }
 
-        public bool WithDraw(double withDrawValue)
+        public bool Withdraw(double withdrawValue)
         {
-            if (withDrawValue <= 0)
+            if (withdrawValue <= 0)
             {
                 Console.WriteLine("You can't withdraw a value less than or equal to zero");
                 return false;
             }
 
-            if (withDrawValue < (Balance + Credit))
+            if (withdrawValue > (Balance + Credit))
             {
                 Console.WriteLine("Insufficient balance!");
                 return false;
             }
 
-            Balance -= withDrawValue;
+            Balance -= withdrawValue;
             Console.WriteLine($"The Current balance of {Name} is {Balance}");
             return true;
         }
@@ -54,9 +54,9 @@ namespace Classes
 
         public bool Transfer(double transferValue, Account targetAccount)
         {
-            if (WithDraw(transferValue))
+            if (Withdraw(transferValue))
             {
-                return Deposit(transferValue);
+                return targetAccount.Deposit(transferValue);
             }
 
             return false;
